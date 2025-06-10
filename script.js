@@ -1,25 +1,10 @@
-const conferences = [
-    {
-        name: "AR/VR World Summit",
-        date: "2025-07-15",
-        location: "San Francisco, CA",
-        website: "https://arvrworldsummit.com"
-    },
-    {
-        name: "Virtual Reality Developers Conference",
-        date: "2025-08-20",
-        location: "New York, NY",
-        website: "https://vrdc.com"
-    },
-    {
-        name: "Augmented Reality Expo",
-        date: "2025-09-10",
-        location: "Los Angeles, CA",
-        website: "https://arexpo.com"
-    }
-];
+async function fetchConferences() {
+    const response = await fetch('conferences.json');
+    const data = await response.json();
+    return data;
+}
 
-function renderConferences() {
+function renderConferences(conferences) {
     const container = document.getElementById('conferences');
     container.innerHTML = '';
 
@@ -53,4 +38,27 @@ function renderConferences() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', renderConferences);
+function filterAndSortConferences(conferences) {
+    const searchInput = document.getElementById('search').value.toLowerCase();
+    const sortOption = document.getElementById('sort').value;
+
+    let filtered = conferences.filter(conference =>
+        conference.name.toLowerCase().includes(searchInput)
+    );
+
+    if (sortOption === 'name') {
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortOption === 'date') {
+        filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+
+    renderConferences(filtered);
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const conferences = await fetchConferences();
+    renderConferences(conferences);
+
+    document.getElementById('search').addEventListener('input', () => filterAndSortConferences(conferences));
+    document.getElementById('sort').addEventListener('change', () => filterAndSortConferences(conferences));
+});
