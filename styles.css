@@ -56,10 +56,10 @@ main {
 }
 
 #conference-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem; /* Increased spacing between cards */
+    align-items: center;
 }
 
 .conference-card {
@@ -71,6 +71,8 @@ main {
     transition: transform 0.3s, box-shadow 0.3s;
     position: relative;
     overflow: hidden;
+    width: 90%; /* Adjusted for responsiveness */
+    max-width: 600px; /* Limit maximum width for larger screens */
 }
 
 .conference-card:hover {
@@ -115,4 +117,22 @@ footer {
     bottom: 0;
     width: 100%;
     box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) {
+    #conference-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .conference-card {
+        width: 45%; /* Two cards per row on medium screens */
+    }
+}
+
+@media (min-width: 1200px) {
+    .conference-card {
+        width: 30%; /* Three cards per row on large screens */
+    }
 }
