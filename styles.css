@@ -6,17 +6,18 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    padding: 2rem 0;
 }
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #3a0ca3, #720026);
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
     color: #ffffff;
     text-align: center;
-    padding: 5rem 2rem;
+    padding: 6rem 2rem;
     border-bottom-left-radius: 80px;
     border-bottom-right-radius: 80px;
-    box-shadow: 0 8px 20px rgba(112, 0, 255, 0.6);
+    box-shadow: 0 8px 20px rgba(112, 0, 255, 0.3);
 }
 
 .hero-content .logo {
@@ -80,15 +81,16 @@ body {
 }
 
 .conference-card {
-    background: linear-gradient(145deg, #2a0a4f, #4b1e7f);
-    border-radius: 30px;
-    box-shadow: 0 8px 20px rgba(123, 47, 247, 0.6);
-    padding: 2rem;
+    background: #1a1a2e;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 2.5rem;
     width: 90%;
-    max-width: 650px;
+    max-width: 600px;
     text-align: center;
-    color: #e0dede;
+    color: #e0e0f0;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
+    margin: 2rem auto;
 }
 
 .conference-card:hover {
@@ -113,14 +115,14 @@ body {
 
 .conference-card a {
     display: inline-block;
-    margin-top: 1.2rem;
-    padding: 0.7rem 1.5rem;
-    background: #9d4edd;
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.8rem;
+    background: #007bff;
     color: #fff;
     text-decoration: none;
-    border-radius: 30px;
+    border-radius: 20px;
     font-weight: 700;
-    box-shadow: 0 0 15px #7b2ff7;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -155,13 +157,14 @@ body {
 }
 
 .news-article {
-    background: #2a0a4f;
-    border-radius: 20px;
-    padding: 1rem;
-    box-shadow: 0 6px 15px rgba(123, 47, 247, 0.7);
+    background: #1a1a2e;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     text-align: left;
     transition: transform 0.3s ease;
     cursor: pointer;
+    margin: 1rem;
 }
 
 .news-article:hover {
@@ -170,20 +173,21 @@ body {
 }
 
 .news-article h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-    color: #d0cde1;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: #e0e0f0;
 }
 
 .news-article p {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: #b0a9c8;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
 }
 
 .news-article a {
-    color: #9d4edd;
+    color: #007bff;
     font-weight: 600;
     text-decoration: none;
     transition: color 0.3s ease;
