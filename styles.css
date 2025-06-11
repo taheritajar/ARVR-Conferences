@@ -10,13 +10,14 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    overflow-y: scroll; /* keep width stable when content height changes */
     padding: 2rem 0;
 }
 
 /* Hero Section */
 .hero {
     position: relative;
-    background: url('assets/ICXR-Banner-Transparent-White.png') no-repeat center/cover, linear-gradient(135deg, rgba(26,26,46,0.6), rgba(22,33,62,0.6));
+    background: linear-gradient(135deg, rgba(26,26,46,0.6), rgba(22,33,62,0.6));
     color: #ffffff;
     text-align: center;
     padding: 6rem 2rem;
@@ -32,6 +33,20 @@ body {
     inset: 0;
     background: rgba(0, 0, 0, 0.45); /* dark overlay for readability */
     pointer-events: none;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('assets/ICXR-Banner-Transparent-White.png') no-repeat center/cover;
+    opacity: 0.15; /* fade intensity */
+    pointer-events: none; /* allow clicks through */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
 }
 
 .hero-content .logo {
