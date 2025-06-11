@@ -246,6 +246,9 @@ body {
     border-radius: 30px;
     width: 90%;
     max-width: 500px;
+    /* Prevent modal from overflowing viewport */
+    max-height: 80vh;
+    overflow-y: auto;
     color: #e0e0f0;
     box-shadow: 0 8px 25px var(--accent);
     text-align: center;
@@ -345,5 +348,16 @@ body {
   /* Pagination buttons smaller */
   .pagination button {
     padding: 0.5rem 1rem;
+  }
+
+  /* Modal responsive */
+  .modal-content {
+    width: 100%;
+    margin: 20% 0 0 0; /* more top space for notch/dynamic island */
+    padding: 1.25rem;
+    border-radius: 20px;
+  }
+  .modal-close {
+    font-size: 1.5rem;
   }
 }
