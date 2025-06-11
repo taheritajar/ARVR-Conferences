@@ -1,0 +1,17 @@
+{
+  "name": "arvr-conferences",
+  "version": "1.0.0",
+  "description": "AR/VR Conferences Website",
+  "main": "script.js",
+  "scripts": {
+    "build": "env-cmd -f .env npm run build:css && npm run build:js",
+    "build:css": "node-sass styles.scss styles.css",
+    "build:js": "node build.js",
+    "serve": "live-server"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "live-server": "^1.2.2",
+    "node-sass": "^9.0.0"
+  }
+}

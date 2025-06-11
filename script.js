@@ -141,7 +141,11 @@ window.addEventListener('click', (event) => {
 
 // Fetch and render AR/VR news using NewsAPI.org
 async function fetchNews() {
-    const apiKey = 'YOUR_NEWSAPI_KEY'; // User must get their own API key from https://newsapi.org/
+    const apiKey = process.env.NEWSAPI_KEY; // API key will be injected during build
+    if (!apiKey) {
+        console.error('News API key not found');
+        return;
+    }
     const url = `https://newsapi.org/v2/everything?q=augmented+reality+OR+virtual+reality+OR+ar+vr&language=en&sortBy=publishedAt&pageSize=6&apiKey=${apiKey}`;
     try {
         const response = await fetch(url);
