@@ -15,7 +15,7 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, rgba(26,26,46,0.9), rgba(22,33,62,0.9)), url('assets/ICXR-Banner-Transparent-White.png') no-repeat center/contain;
+    background: url('assets/ICXR-Banner-Transparent-White.png') no-repeat center/cover, linear-gradient(135deg, rgba(26,26,46,0.6), rgba(22,33,62,0.6));
     color: #ffffff;
     text-align: center;
     padding: 6rem 2rem;
