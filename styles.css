@@ -3,6 +3,10 @@
   --accent: #ff9800; /* matches logo orange */
 }
 
+html {
+    overflow-y: scroll; /* keeps viewport scrollbar visible to prevent width shift */
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background: #0d0d1a url('assets/wallpaperflare.com_wallpaper1.jpg') no-repeat center/cover fixed;
