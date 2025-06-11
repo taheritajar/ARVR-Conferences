@@ -8,11 +8,12 @@
     <meta name="author" content="AR/VR Conferences">
     <title>AR/VR Conferences</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="hero">
         <div class="hero-content">
-            <img src="logo.png" alt="AR/VR Conferences Logo" class="logo">
+            <img src="logo.svg" alt="AR/VR Conferences Logo" class="logo">
             <h1>AR/VR Conferences</h1>
             <p>Explore the future of Augmented and Virtual Reality with the top conferences worldwide.</p>
         </div>
@@ -28,8 +29,28 @@
         <section id="conference-list" class="conference-list">
             <h2>Upcoming Conferences</h2>
             <div id="conferences"></div>
+            <div id="pagination" class="pagination"></div>
+        </section>
+
+        <!-- New AR/VR News Section -->
+        <section id="news-section" class="news-section">
+            <h2>Latest AR/VR News</h2>
+            <div id="news-container"></div>
         </section>
     </main>
+
+    <!-- Modal for conference details -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="modal-close" class="modal-close">&times;</span>
+            <h3 id="modal-title"></h3>
+            <p id="modal-date"></p>
+            <p id="modal-location"></p>
+            <p id="modal-description"></p>
+            <a id="modal-link" href="#" target="_blank">Visit Website</a>
+        </div>
+    </div>
+
     <footer class="footer">
         <p>&copy; 2025 AR/VR Conferences | Designed for the Future</p>
         <p>Contact us: <a href="mailto:info@arvrconferences.com">info@arvrconferences.com</a></p>

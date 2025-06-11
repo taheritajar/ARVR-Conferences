@@ -1,121 +1,297 @@
-/* General Styles */
+/* Redesign styles inspired by ICXR.org */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
+    background: #0a0a23;
+    color: #e0e0f0;
     margin: 0;
     padding: 0;
-    background: #f4f4f4;
-    color: #333;
     overflow-x: hidden;
 }
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
-    color: #fff;
+    background: linear-gradient(135deg, #3a0ca3, #720026);
+    color: #ffffff;
     text-align: center;
-    padding: 4rem 2rem;
+    padding: 5rem 2rem;
+    border-bottom-left-radius: 80px;
+    border-bottom-right-radius: 80px;
+    box-shadow: 0 8px 20px rgba(112, 0, 255, 0.6);
 }
 
 .hero-content .logo {
-    width: 150px;
-    margin-bottom: 1rem;
+    width: 160px;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 8px #7b2ff7);
 }
 
 .hero-content h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     margin: 0;
-    font-weight: bold;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 10px #9d4edd;
 }
 
 .hero-content p {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin-top: 1rem;
+    font-weight: 500;
+    color: #d0cde1;
+    text-shadow: 0 0 6px #b5838d;
 }
 
 /* Search and Sort */
 .search-sort {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    margin: 2rem auto;
-    max-width: 800px;
+    gap: 1.5rem;
+    margin: 3rem auto;
+    max-width: 900px;
 }
 
 .search-sort input, .search-sort select {
-    padding: 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
     width: 100%;
-    max-width: 300px;
+    max-width: 320px;
+    background: #1f1a44;
+    color: #e0dede;
+    box-shadow: 0 0 15px #7b2ff7;
+    transition: box-shadow 0.3s ease;
+}
+
+.search-sort input:focus, .search-sort select:focus {
+    outline: none;
+    box-shadow: 0 0 25px #9d4edd;
 }
 
 /* Conference List */
 .conference-list {
-    padding: 2rem;
+    padding: 3rem 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 2.5rem;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .conference-card {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
+    background: linear-gradient(145deg, #2a0a4f, #4b1e7f);
+    border-radius: 30px;
+    box-shadow: 0 8px 20px rgba(123, 47, 247, 0.6);
+    padding: 2rem;
     width: 90%;
-    max-width: 600px;
+    max-width: 650px;
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
+    color: #e0dede;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .conference-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(157, 78, 221, 0.8);
 }
 
 .conference-card h3 {
-    font-size: 1.5rem;
-    margin: 0.5rem 0;
+    font-size: 1.8rem;
+    margin: 0.5rem 0 1rem 0;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-shadow: 0 0 8px #9d4edd;
 }
 
 .conference-card p {
     margin: 0.5rem 0;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #d0cde1;
 }
 
 .conference-card a {
     display: inline-block;
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    background: #007bff;
+    margin-top: 1.2rem;
+    padding: 0.7rem 1.5rem;
+    background: #9d4edd;
     color: #fff;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background 0.3s;
+    border-radius: 30px;
+    font-weight: 700;
+    box-shadow: 0 0 15px #7b2ff7;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .conference-card a:hover {
-    background: #0056b3;
+    background: #7b2ff7;
+    box-shadow: 0 0 25px #9d4edd;
+}
+
+/* News Section Styles */
+.news-section {
+    padding: 2rem 1rem;
+    max-width: 900px;
+    margin: 3rem auto;
+    background: linear-gradient(135deg, #4b1e7f, #720026);
+    border-radius: 30px;
+    box-shadow: 0 8px 25px rgba(123, 47, 247, 0.6);
+    color: #e0e0f0;
+    text-align: center;
+}
+
+.news-section h2 {
+    font-weight: 900;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px #9d4edd;
+}
+
+#news-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.news-article {
+    background: #2a0a4f;
+    border-radius: 20px;
+    padding: 1rem;
+    box-shadow: 0 6px 15px rgba(123, 47, 247, 0.7);
+    text-align: left;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.news-article:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(157, 78, 221, 0.8);
+}
+
+.news-article h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: #d0cde1;
+}
+
+.news-article p {
+    font-size: 0.95rem;
+    color: #b0a9c8;
+    margin-bottom: 0.5rem;
+}
+
+.news-article a {
+    color: #9d4edd;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.news-article a:hover {
+    color: #7b2ff7;
+    text-decoration: underline;
+}
+
+/* Pagination Styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.pagination button {
+    background: #7b2ff7;
+    border: none;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 0 10px #9d4edd;
+    transition: background 0.3s ease;
+}
+
+.pagination button:hover {
+    background: #9d4edd;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(10, 10, 35, 0.9);
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #3a0ca3, #720026);
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: 30px;
+    width: 90%;
+    max-width: 500px;
+    color: #e0e0f0;
+    box-shadow: 0 8px 25px rgba(112, 0, 255, 0.8);
+    text-align: center;
+}
+
+.modal-close {
+    color: #e0e0f0;
+    float: right;
+    font-size: 2rem;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+}
+
+.modal-close:hover {
+    color: #b5838d;
 }
 
 /* Footer */
 .footer {
     text-align: center;
-    padding: 1rem 0;
-    background: #1a1a2e;
-    color: #fff;
-    margin-top: 2rem;
+    padding: 1.5rem 0;
+    background: #3a0ca3;
+    color: #e0e0f0;
+    margin-top: 3rem;
+    border-top-left-radius: 80px;
+    border-top-right-radius: 80px;
+    box-shadow: 0 -8px 20px rgba(112, 0, 255, 0.6);
 }
 
 .footer .social-links a {
-    color: #fff;
+    color: #e0e0f0;
     text-decoration: none;
-    margin: 0 0.5rem;
+    margin: 0 0.7rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
 }
 
 .footer .social-links a:hover {
-    text-decoration: underline;
+    color: #b5838d;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #1f1a44;
+    border-radius: 30px;
+}
+::-webkit-scrollbar-thumb {
+    background: #7b2ff7;
+    border-radius: 30px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #9d4edd;
 }
