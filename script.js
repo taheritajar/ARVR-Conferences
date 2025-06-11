@@ -65,10 +65,12 @@ function renderConferences(conferences) {
         const daysItem = createCountdownItem('Days', deadline, 'days');
         const hoursItem = createCountdownItem('Hours', deadline, 'hours');
         const minutesItem = createCountdownItem('Minutes', deadline, 'minutes');
+        const secondsItem = createCountdownItem('Seconds', deadline, 'seconds');
         
         countdownContainer.appendChild(daysItem);
         countdownContainer.appendChild(hoursItem);
         countdownContainer.appendChild(minutesItem);
+        countdownContainer.appendChild(secondsItem);
         
         card.appendChild(countdownContainer);
         card.appendChild(location);
@@ -91,13 +93,9 @@ function renderConferences(conferences) {
 }
 
 function filterAndSortConferences(conferences) {
-    const searchTerm = document.getElementById('search').value.toLowerCase();
     const sortOption = document.getElementById('sort').value;
 
-    // Show all conferences if search is empty
-    let filtered = searchTerm ? 
-        conferences.filter(conf => conf.name.toLowerCase().includes(searchTerm)) : 
-        [...conferences];
+    let filtered = [...conferences];
 
     if (sortOption === 'name') {
         filtered.sort((a, b) => a.name.localeCompare(b.name));
@@ -183,6 +181,7 @@ function updateCountdown(card, deadline) {
     const daysItem = countdownContainer.querySelector('.countdown-item:first-child .countdown-value');
     const hoursItem = countdownContainer.querySelector('.countdown-item:nth-child(2) .countdown-value');
     const minutesItem = countdownContainer.querySelector('.countdown-item:nth-child(3) .countdown-value');
+    const secondsItem = countdownContainer.querySelector('.countdown-item:last-child .countdown-value');
 
     function update() {
         const now = new Date();
@@ -192,43 +191,36 @@ function updateCountdown(card, deadline) {
             daysItem.textContent = '00';
             hoursItem.textContent = '00';
             minutesItem.textContent = '00';
+            secondsItem.textContent = '00';
             
             // Add expired class
             daysItem.classList.add('expired');
             hoursItem.classList.add('expired');
             minutesItem.classList.add('expired');
+            secondsItem.classList.add('expired');
             return;
         }
 
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
         daysItem.textContent = days.toString().padStart(2, '0');
         hoursItem.textContent = hours.toString().padStart(2, '0');
         minutesItem.textContent = minutes.toString().padStart(2, '0');
+        secondsItem.textContent = seconds.toString().padStart(2, '0');
 
         // Remove expired class if it exists
         daysItem.classList.remove('expired');
         hoursItem.classList.remove('expired');
         minutesItem.classList.remove('expired');
+        secondsItem.classList.remove('expired');
     }
 
-    // Update immediately and then every minute
+    // Update immediately and then every second
     update();
-    
-    // Update every minute
-    setInterval(update, 60000);
-    
-    // Update every second for minutes
-    setInterval(() => {
-        const now = new Date();
-        const diff = deadline - now;
-        if (diff > 0) {
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            minutesItem.textContent = minutes.toString().padStart(2, '0');
-        }
-    }, 1000);
+    setInterval(update, 1000);
 }
 
 // Initialize
@@ -240,13 +232,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     const searchInput = document.getElementById('search');
     const sortSelect = document.getElementById('sort');
 
-    // Debounced search function to prevent too many updates
-    let searchTimeout;
+    // Real-time search without debounce
     searchInput.addEventListener('input', () => {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-            filterAndSortConferences(currentConferences);
-        }, 200); // 200ms delay
+        const searchTerm = searchInput.value.toLowerCase();
+        const filtered = searchTerm ? 
+            currentConferences.filter(conf => conf.name.toLowerCase().includes(searchTerm)) : 
+            [...currentConferences];
+        
+        currentPage = 1;
+        renderPage();
     });
 
     sortSelect.addEventListener('change', () => filterAndSortConferences(currentConferences));
