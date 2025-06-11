@@ -5,6 +5,7 @@
 
 html {
     overflow-y: scroll; /* keeps viewport scrollbar visible to prevent width shift */
+    scrollbar-gutter: stable; /* reserve gutter even if overlay scrollbars */
 }
 
 body {
@@ -15,6 +16,8 @@ body {
     padding: 0;
     overflow-x: hidden;
     overflow-y: scroll; /* keep width stable when content height changes */
+    /* Ensure slight extra height so scrollbar always exists */
+    min-height: 101vh;
     padding: 2rem 0;
 }
 
@@ -118,7 +121,8 @@ body {
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     padding: 2rem;
-    width: 90%;
+    /* Fixed width to avoid resizing when filtering/sorting */
+    width: 600px;
     max-width: 600px;
     text-align: center;
     color: #e0e0f0;
