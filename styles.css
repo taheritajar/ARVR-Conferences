@@ -303,3 +303,47 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #9d4edd;
 }
+
+/* =====================
+   Responsive Tweaks
+   =====================*/
+@media (max-width: 640px) {
+  /* Hero section */
+  .hero {
+    padding: 4rem 1rem;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+  }
+  .hero-content .logo {
+    width: 120px;
+  }
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  /* Search + sort stack */
+  .search-sort {
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 95%;
+  }
+  .search-sort input,
+  .search-sort select {
+    max-width: 100%;
+  }
+
+  /* Conference card becomes fluid */
+  .conference-card {
+    width: 90%;
+    max-width: 100%;
+    padding: 1.5rem;
+  }
+
+  /* Pagination buttons smaller */
+  .pagination button {
+    padding: 0.5rem 1rem;
+  }
+}
