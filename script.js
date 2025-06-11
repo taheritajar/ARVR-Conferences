@@ -62,15 +62,22 @@ function renderConferences(conferences) {
         const countdownContainer = document.createElement('div');
         countdownContainer.className = 'countdown-container';
         
-        const daysItem = createCountdownItem('Days', deadline, 'days');
-        const hoursItem = createCountdownItem('Hours', deadline, 'hours');
-        const minutesItem = createCountdownItem('Minutes', deadline, 'minutes');
-        const secondsItem = createCountdownItem('Seconds', deadline, 'seconds');
+        const countdownCircle = document.createElement('div');
+        countdownCircle.className = 'countdown-circle';
         
-        countdownContainer.appendChild(daysItem);
-        countdownContainer.appendChild(hoursItem);
-        countdownContainer.appendChild(minutesItem);
-        countdownContainer.appendChild(secondsItem);
+        const countdownContent = document.createElement('div');
+        countdownContent.className = 'countdown-content';
+        
+        const countdownValue = document.createElement('div');
+        countdownValue.className = 'countdown-value';
+        
+        const countdownLabel = document.createElement('div');
+        countdownLabel.className = 'countdown-label';
+        
+        countdownContent.appendChild(countdownValue);
+        countdownContent.appendChild(countdownLabel);
+        countdownCircle.appendChild(countdownContent);
+        countdownContainer.appendChild(countdownCircle);
         
         card.appendChild(countdownContainer);
         card.appendChild(location);
@@ -93,10 +100,18 @@ function renderConferences(conferences) {
 }
 
 function filterAndSortConferences(conferences) {
+    const searchTerm = document.getElementById('search').value.toLowerCase();
     const sortOption = document.getElementById('sort').value;
 
-    let filtered = [...conferences];
+    // Filter by search term
+    let filtered = searchTerm ? 
+        conferences.filter(conf => 
+            conf.name.toLowerCase().includes(searchTerm) ||
+            conf.location.toLowerCase().includes(searchTerm)
+        ) : 
+        [...conferences];
 
+    // Sort results
     if (sortOption === 'name') {
         filtered.sort((a, b) => a.name.localeCompare(b.name));
     } else if (sortOption === 'date') {
@@ -178,26 +193,18 @@ function updateCountdown(card, deadline) {
     const countdownContainer = card.querySelector('.countdown-container');
     if (!countdownContainer) return;
 
-    const daysItem = countdownContainer.querySelector('.countdown-item:first-child .countdown-value');
-    const hoursItem = countdownContainer.querySelector('.countdown-item:nth-child(2) .countdown-value');
-    const minutesItem = countdownContainer.querySelector('.countdown-item:nth-child(3) .countdown-value');
-    const secondsItem = countdownContainer.querySelector('.countdown-item:last-child .countdown-value');
+    const countdownCircle = countdownContainer.querySelector('.countdown-circle');
+    const countdownValue = countdownContainer.querySelector('.countdown-value');
+    const countdownLabel = countdownContainer.querySelector('.countdown-label');
 
     function update() {
         const now = new Date();
         const diff = deadline - now;
 
         if (diff <= 0) {
-            daysItem.textContent = '00';
-            hoursItem.textContent = '00';
-            minutesItem.textContent = '00';
-            secondsItem.textContent = '00';
-            
-            // Add expired class
-            daysItem.classList.add('expired');
-            hoursItem.classList.add('expired');
-            minutesItem.classList.add('expired');
-            secondsItem.classList.add('expired');
+            countdownValue.textContent = 'EXPIRED';
+            countdownLabel.textContent = '';
+            countdownCircle.classList.add('expired');
             return;
         }
 
@@ -206,16 +213,13 @@ function updateCountdown(card, deadline) {
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-        daysItem.textContent = days.toString().padStart(2, '0');
-        hoursItem.textContent = hours.toString().padStart(2, '0');
-        minutesItem.textContent = minutes.toString().padStart(2, '0');
-        secondsItem.textContent = seconds.toString().padStart(2, '0');
+        // Format time string
+        const timeStr = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        countdownValue.textContent = timeStr;
+        countdownLabel.textContent = 'UNTIL DEADLINE';
 
         // Remove expired class if it exists
-        daysItem.classList.remove('expired');
-        hoursItem.classList.remove('expired');
-        minutesItem.classList.remove('expired');
-        secondsItem.classList.remove('expired');
+        countdownCircle.classList.remove('expired');
     }
 
     // Update immediately and then every second
@@ -232,16 +236,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     const searchInput = document.getElementById('search');
     const sortSelect = document.getElementById('sort');
 
-    // Real-time search without debounce
+    // Real-time search
     searchInput.addEventListener('input', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const filtered = searchTerm ? 
-            currentConferences.filter(conf => conf.name.toLowerCase().includes(searchTerm)) : 
-            [...currentConferences];
-        
-        currentPage = 1;
-        renderPage();
+        filterAndSortConferences(currentConferences);
     });
 
-    sortSelect.addEventListener('change', () => filterAndSortConferences(currentConferences));
+    // Sort change
+    sortSelect.addEventListener('change', () => {
+        filterAndSortConferences(currentConferences);
+    });
 });
