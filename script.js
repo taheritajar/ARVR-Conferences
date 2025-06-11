@@ -119,6 +119,13 @@ function filterAndSortConferences(conferences) {
     }
 
     currentConferences = filtered;
+    
+    // If search term is cleared and we have filtered results, reset to all conferences
+    if (!searchTerm && filtered.length === 0) {
+        filtered = [...conferences];
+        currentConferences = filtered;
+    }
+    
     currentPage = 1;
     renderPage();
 }
