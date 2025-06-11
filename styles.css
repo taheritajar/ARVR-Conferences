@@ -111,93 +111,32 @@ body {
 }
 
 /* Countdown Timer Styles */
-/* Countdown Timer Styles */
 .countdown-container {
     display: flex;
     justify-content: center;
-    margin: 1.5rem 0;
-    position: relative;
-}
-
-.countdown-circle {
-    width: 240px;
-    height: 180px;
-    border-radius: 120px 120px 90px 90px;
-    background: linear-gradient(145deg, #1a1a2e, #000);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 1rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    position: relative;
-    overflow: hidden;
-}
-
-.countdown-circle::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: linear-gradient(145deg, #007bff, #0056b3);
-    box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
-    z-index: 1;
-}
-
-.countdown-content {
-    position: relative;
-    z-index: 2;
-    color: #fff;
-    text-align: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
 }
 
 .countdown-value {
-    font-size: 2rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    margin: 0.5rem 0;
-    text-shadow: 0 0 8px rgba(0, 123, 255, 0.8);
+    color: #ffeb3b;
+    text-shadow: 0 0 8px rgba(255, 235, 59, 0.8);
 }
 
 .countdown-label {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: #b0a9c8;
     letter-spacing: 0.05em;
-    margin: 0.5rem 0;
 }
 
-/* Expired State */
-.countdown-circle.expired::before {
-    background: linear-gradient(145deg, #ff4444, #cc0000);
-    box-shadow: 0 0 15px rgba(255, 68, 68, 0.5);
-}
-
-.countdown-circle.expired .countdown-value {
-    text-shadow: 0 0 8px rgba(255, 68, 68, 0.8);
-}
-
-/* Hover Effect */
+.countdown-circle,
+.countdown-circle::before,
+.countdown-circle.expired,
 .countdown-circle:hover::before {
-    transform: translate(-50%, -50%) scale(1.05);
-    box-shadow: 0 0 20px rgba(0, 123, 255, 0.7);
-}
-
-/* Animation */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.02); }
-    100% { transform: scale(1); }
-}
-
-.countdown-circle {
-    animation: pulse 2s infinite;
-}
-
-.countdown-circle.expired {
-    animation: none;
+    all: unset;
 }
 
 .conference-card p {
@@ -224,8 +163,6 @@ body {
     background: #7b2ff7;
     box-shadow: 0 0 25px #9d4edd;
 }
-
-
 
 /* Pagination Styles */
 .pagination {

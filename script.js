@@ -13,6 +13,7 @@ const modalLink = document.getElementById('modal-link');
 let currentPage = 1;
 const itemsPerPage = 5;
 let currentConferences = [];
+let masterConferences = [];
 
 function showLoading() {
     container.innerHTML = '<p class="loading">Loading conferences...</p>';
@@ -99,16 +100,17 @@ function renderConferences(conferences) {
     });
 }
 
-function filterAndSortConferences(conferences) {
+function filterAndSortConferences() {
+    const conferences = masterConferences;
     const searchTerm = document.getElementById('search').value.toLowerCase();
     const sortOption = document.getElementById('sort').value;
 
     // Filter by search term
-    let filtered = searchTerm ? 
-        conferences.filter(conf => 
+    let filtered = searchTerm ?
+        conferences.filter(conf =>
             conf.name.toLowerCase().includes(searchTerm) ||
             conf.location.toLowerCase().includes(searchTerm)
-        ) : 
+        ) :
         [...conferences];
 
     // Sort results
@@ -119,13 +121,6 @@ function filterAndSortConferences(conferences) {
     }
 
     currentConferences = filtered;
-    
-    // If search term is cleared and we have filtered results, reset to all conferences
-    if (!searchTerm && filtered.length === 0) {
-        filtered = [...conferences];
-        currentConferences = filtered;
-    }
-    
     currentPage = 1;
     renderPage();
 }
@@ -237,6 +232,7 @@ function updateCountdown(card, deadline) {
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
     const conferences = await fetchConferences();
+    masterConferences = conferences;
     currentConferences = conferences;
     renderPage();
 
@@ -245,11 +241,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Real-time search
     searchInput.addEventListener('input', () => {
-        filterAndSortConferences(currentConferences);
+        filterAndSortConferences();
     });
 
     // Sort change
     sortSelect.addEventListener('change', () => {
-        filterAndSortConferences(currentConferences);
+        filterAndSortConferences();
     });
 });
