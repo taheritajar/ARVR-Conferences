@@ -84,13 +84,17 @@ body {
     background: #1a1a2e;
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    padding: 2.5rem;
+    padding: 2rem;
     width: 90%;
     max-width: 600px;
     text-align: center;
     color: #e0e0f0;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     margin: 2rem auto;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .conference-card:hover {
@@ -104,6 +108,34 @@ body {
     font-weight: 700;
     letter-spacing: 0.03em;
     text-shadow: 0 0 8px #9d4edd;
+}
+
+/* Countdown Timer Styles */
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.countdown-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #007bff;
+    text-shadow: 0 0 4px #0056b3;
+}
+
+.countdown-label {
+    color: #b0a9c8;
 }
 
 .conference-card p {

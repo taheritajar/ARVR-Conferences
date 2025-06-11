@@ -57,13 +57,29 @@ function renderConferences(conferences) {
         link.target = '_blank';
 
         card.appendChild(name);
-        card.appendChild(date);
+        
+        // Add countdown timer
+        const countdownContainer = document.createElement('div');
+        countdownContainer.className = 'countdown-container';
+        
+        const daysItem = createCountdownItem('Days', deadline, 'days');
+        const hoursItem = createCountdownItem('Hours', deadline, 'hours');
+        const minutesItem = createCountdownItem('Minutes', deadline, 'minutes');
+        
+        countdownContainer.appendChild(daysItem);
+        countdownContainer.appendChild(hoursItem);
+        countdownContainer.appendChild(minutesItem);
+        
+        card.appendChild(countdownContainer);
         card.appendChild(location);
         card.appendChild(link);
 
         card.addEventListener('click', () => openModal(conference));
 
         container.appendChild(card);
+
+        // Start countdown timer
+        updateCountdown(card, deadline);
 
         // Animate card appearance
         setTimeout(() => {
@@ -78,7 +94,10 @@ function filterAndSortConferences(conferences) {
     const searchTerm = document.getElementById('search').value.toLowerCase();
     const sortOption = document.getElementById('sort').value;
 
-    let filtered = conferences.filter(conf => conf.name.toLowerCase().includes(searchTerm));
+    // Show all conferences if search is empty
+    let filtered = searchTerm ? 
+        conferences.filter(conf => conf.name.toLowerCase().includes(searchTerm)) : 
+        [...conferences];
 
     if (sortOption === 'name') {
         filtered.sort((a, b) => a.name.localeCompare(b.name));
@@ -138,6 +157,57 @@ window.addEventListener('click', (event) => {
         modal.style.display = 'none';
     }
 });
+
+function createCountdownItem(label, deadline, unit) {
+    const item = document.createElement('div');
+    item.className = 'countdown-item';
+    
+    const value = document.createElement('div');
+    value.className = 'countdown-value';
+    value.textContent = '00';
+    
+    const labelElement = document.createElement('div');
+    labelElement.className = 'countdown-label';
+    labelElement.textContent = label;
+    
+    item.appendChild(value);
+    item.appendChild(labelElement);
+    
+    return item;
+}
+
+function updateCountdown(card, deadline) {
+    const countdownContainer = card.querySelector('.countdown-container');
+    if (!countdownContainer) return;
+
+    const daysItem = countdownContainer.querySelector('.countdown-item:first-child .countdown-value');
+    const hoursItem = countdownContainer.querySelector('.countdown-item:nth-child(2) .countdown-value');
+    const minutesItem = countdownContainer.querySelector('.countdown-item:nth-child(3) .countdown-value');
+
+    function update() {
+        const now = new Date();
+        const diff = deadline - now;
+
+        if (diff <= 0) {
+            daysItem.textContent = '00';
+            hoursItem.textContent = '00';
+            minutesItem.textContent = '00';
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+        daysItem.textContent = days.toString().padStart(2, '0');
+        hoursItem.textContent = hours.toString().padStart(2, '0');
+        minutesItem.textContent = minutes.toString().padStart(2, '0');
+    }
+
+    // Update immediately and then every minute
+    update();
+    setInterval(update, 60000);
+}
 
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
