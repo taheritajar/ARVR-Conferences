@@ -139,55 +139,7 @@ window.addEventListener('click', (event) => {
     }
 });
 
-// Fetch and render AR/VR news using NewsAPI.org
-async function fetchNews() {
-    const apiKey = process.env.NEWSAPI_KEY; // API key will be injected during build
-    if (!apiKey) {
-        console.error('News API key not found');
-        return;
-    }
-    const url = `https://newsapi.org/v2/everything?q=augmented+reality+OR+virtual+reality+OR+ar+vr&language=en&sortBy=publishedAt&pageSize=6&apiKey=${apiKey}`;
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        if (data.status === 'ok') {
-            renderNews(data.articles);
-        } else {
-            document.getElementById('news-container').innerHTML = '<p>Failed to load news.</p>';
-        }
-    } catch (error) {
-        document.getElementById('news-container').innerHTML = '<p>Error loading news.</p>';
-    }
-}
-
-function renderNews(articles) {
-    const newsContainer = document.getElementById('news-container');
-    newsContainer.innerHTML = '';
-
-    articles.forEach(article => {
-        const card = document.createElement('div');
-        card.className = 'news-article';
-
-        const title = document.createElement('h3');
-        title.textContent = article.title;
-
-        const description = document.createElement('p');
-        description.textContent = article.description || 'No description available.';
-
-        const link = document.createElement('a');
-        link.href = article.url;
-        link.textContent = 'Read More';
-        link.target = '_blank';
-
-        card.appendChild(title);
-        card.appendChild(description);
-        card.appendChild(link);
-
-        newsContainer.appendChild(card);
-    });
-}
-
-// Extend DOMContentLoaded to fetch news
+// Initialize
 document.addEventListener('DOMContentLoaded', async () => {
     const conferences = await fetchConferences();
     currentConferences = conferences;
@@ -195,6 +147,4 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('search').addEventListener('input', () => filterAndSortConferences(currentConferences));
     document.getElementById('sort').addEventListener('change', () => filterAndSortConferences(currentConferences));
-
-    await fetchNews();
 });
