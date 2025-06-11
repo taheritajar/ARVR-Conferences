@@ -114,10 +114,8 @@ body {
 .countdown-container {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    margin: 1rem 0;
-    font-size: 1.1rem;
-    font-weight: 600;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
 }
 
 .countdown-item {
@@ -130,12 +128,41 @@ body {
 .countdown-value {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #007bff;
+    color: #fff;
     text-shadow: 0 0 4px #0056b3;
+    padding: 0.8rem 1.2rem;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #007bff, #0056b3);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+.countdown-value:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.6);
 }
 
 .countdown-label {
     color: #b0a9c8;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+}
+
+/* Add animation for countdown values */
+@keyframes countdownBlink {
+    0% { opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+.countdown-value {
+    animation: countdownBlink 2s infinite;
+}
+
+.countdown-value.expired {
+    background: linear-gradient(145deg, #ff4444, #cc0000);
+    text-shadow: 0 0 4px #cc0000;
+    animation: none;
 }
 
 .conference-card p {

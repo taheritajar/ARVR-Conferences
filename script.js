@@ -192,6 +192,11 @@ function updateCountdown(card, deadline) {
             daysItem.textContent = '00';
             hoursItem.textContent = '00';
             minutesItem.textContent = '00';
+            
+            // Add expired class
+            daysItem.classList.add('expired');
+            hoursItem.classList.add('expired');
+            minutesItem.classList.add('expired');
             return;
         }
 
@@ -202,11 +207,28 @@ function updateCountdown(card, deadline) {
         daysItem.textContent = days.toString().padStart(2, '0');
         hoursItem.textContent = hours.toString().padStart(2, '0');
         minutesItem.textContent = minutes.toString().padStart(2, '0');
+
+        // Remove expired class if it exists
+        daysItem.classList.remove('expired');
+        hoursItem.classList.remove('expired');
+        minutesItem.classList.remove('expired');
     }
 
     // Update immediately and then every minute
     update();
+    
+    // Update every minute
     setInterval(update, 60000);
+    
+    // Update every second for minutes
+    setInterval(() => {
+        const now = new Date();
+        const diff = deadline - now;
+        if (diff > 0) {
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            minutesItem.textContent = minutes.toString().padStart(2, '0');
+        }
+    }, 1000);
 }
 
 // Initialize
@@ -215,6 +237,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     currentConferences = conferences;
     renderPage();
 
-    document.getElementById('search').addEventListener('input', () => filterAndSortConferences(currentConferences));
-    document.getElementById('sort').addEventListener('change', () => filterAndSortConferences(currentConferences));
+    const searchInput = document.getElementById('search');
+    const sortSelect = document.getElementById('sort');
+
+    // Debounced search function to prevent too many updates
+    let searchTimeout;
+    searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            filterAndSortConferences(currentConferences);
+        }, 200); // 200ms delay
+    });
+
+    sortSelect.addEventListener('change', () => filterAndSortConferences(currentConferences));
 });
