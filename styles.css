@@ -1,7 +1,7 @@
 /* Redesign styles inspired by ICXR.org */
 body {
     font-family: 'Inter', sans-serif;
-    background: #0a0a23;
+    background: #0d0d1a url('assets/wallpaperflare.com_wallpaper1.jpg') no-repeat center/cover fixed;
     color: #e0e0f0;
     margin: 0;
     padding: 0;
@@ -11,7 +11,7 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    background: linear-gradient(135deg, rgba(26,26,46,0.9), rgba(22,33,62,0.9)), url('assets/ICXR-Banner-Transparent-White.png') no-repeat center/contain;
     color: #ffffff;
     text-align: center;
     padding: 6rem 2rem;
@@ -60,13 +60,13 @@ body {
     max-width: 320px;
     background: #1f1a44;
     color: #e0dede;
-    box-shadow: 0 0 15px #7b2ff7;
+    box-shadow: 0 0 15px var(--accent);
     transition: box-shadow 0.3s ease;
 }
 
 .search-sort input:focus, .search-sort select:focus {
     outline: none;
-    box-shadow: 0 0 25px #9d4edd;
+    box-shadow: 0 0 25px var(--accent);
 }
 
 /* Conference List */
@@ -85,7 +85,7 @@ body {
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     padding: 2rem;
-    width: 90%;
+    width: 100%;
     max-width: 600px;
     text-align: center;
     color: #e0e0f0;
@@ -95,6 +95,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .conference-card:hover {
@@ -150,7 +151,7 @@ body {
     display: inline-block;
     margin-top: 1.5rem;
     padding: 0.8rem 1.8rem;
-    background: #007bff;
+    background: var(--accent);
     color: #fff;
     text-decoration: none;
     border-radius: 20px;
@@ -160,8 +161,8 @@ body {
 }
 
 .conference-card a:hover {
-    background: #7b2ff7;
-    box-shadow: 0 0 25px #9d4edd;
+    background: #ffb74d;
+    box-shadow: 0 0 25px var(--accent);
 }
 
 /* Pagination Styles */
@@ -264,4 +265,9 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #9d4edd;
+}
+
+/* Primary accent color */
+:root {
+  --accent: #ff9800; /* matches logo orange */
 }
