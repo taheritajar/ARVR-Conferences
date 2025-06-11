@@ -3,32 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Stay updated with the latest AR/VR conferences, deadlines, and locations. Explore the future of Augmented and Virtual Reality.">
+    <meta name="description" content="Discover the latest AR/VR conferences, deadlines, and locations. Stay ahead in the world of Augmented and Virtual Reality.">
     <meta name="keywords" content="AR conferences, VR conferences, Augmented Reality, Virtual Reality, AR/VR events, technology conferences">
     <meta name="author" content="AR/VR Conferences">
     <title>AR/VR Conferences</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>AR/VR Conferences</h1>
-        <p>Explore the future of Augmented and Virtual Reality with these top conferences.</p>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>AR/VR Conferences</h1>
+            <p>Explore the future of Augmented and Virtual Reality with the top conferences worldwide.</p>
+        </div>
     </header>
     <main>
-        <section id="search-sort">
+        <section id="search-sort" class="search-sort">
             <input type="text" id="search" placeholder="Search conferences...">
             <select id="sort">
                 <option value="name">Sort by Name</option>
                 <option value="date">Sort by Deadline</option>
             </select>
         </section>
-        <section id="conference-list">
+        <section id="conference-list" class="conference-list">
             <h2>Upcoming Conferences</h2>
             <div id="conferences"></div>
         </section>
     </main>
-    <footer>
+    <footer class="footer">
         <p>&copy; 2025 AR/VR Conferences | Designed for the Future</p>
+        <p>Contact us: <a href="mailto:info@arvrconferences.com">info@arvrconferences.com</a></p>
     </footer>
     <script src="script.js"></script>
 </body>
